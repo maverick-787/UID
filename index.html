@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saffron & Ember — Fine Dining Delivered</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- React & Babel CDNs for simple React integration -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-logo">Saffron<span>&</span>Ember</div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#order">Order</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" onclick="toggleTheme()" id="theme-icon" title="Toggle Dark Mode">🌙</button>
+      <a href="login.html" id="auth-btn" class="nav-cta"
+        style="background:transparent; color:var(--ember); border:1.5px solid var(--ember); text-decoration:none;">Login</a>
+      <button class="nav-cta" onclick="openCart()">🛒 Cart <span id="nav-cart-count"></span></button>
+    </div>
+    <button class="hamburger" onclick="toggleMobileNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE NAV DRAWER -->
+  <div id="mobile-nav"
+    style="display:none;position:fixed;top:72px;left:0;right:0;background:var(--cream);z-index:900;padding:1.5rem 6vw;border-bottom:1px solid var(--border);">
+    <ul style="list-style:none;display:flex;flex-direction:column;gap:1.2rem;">
+      <li><a href="#home" onclick="toggleMobileNav()"
+          style="text-decoration:none;font-size:1rem;font-weight:500;color:var(--charcoal);">Home</a></li>
+      <li><a href="#about" onclick="toggleMobileNav()"
+          style="text-decoration:none;font-size:1rem;font-weight:500;color:var(--charcoal);">About</a></li>
+      <li><a href="#menu" onclick="toggleMobileNav()"
+          style="text-decoration:none;font-size:1rem;font-weight:500;color:var(--charcoal);">Menu</a></li>
+      <li><a href="#order" onclick="toggleMobileNav()"
+          style="text-decoration:none;font-size:1rem;font-weight:500;color:var(--charcoal);">Order</a></li>
+      <li><a href="#gallery" onclick="toggleMobileNav()"
+          style="text-decoration:none;font-size:1rem;font-weight:500;color:var(--charcoal);">Gallery</a></li>
+      <li><a href="#contact" onclick="toggleMobileNav()"
+          style="text-decoration:none;font-size:1rem;font-weight:500;color:var(--charcoal);">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- ============ HOME ============ -->
+  <section id="home">
+    <div class="hero-left">
+      <div class="hero-badge">Now Delivering Across the City</div>
+      <h1 class="hero-h1">Crafted with <em>Fire,</em><br>Served with Soul</h1>
+      <p class="hero-sub">From our kitchen to your table — signature dishes made with heritage spices, local
+        ingredients, and a whole lot of love. Order in 3 clicks.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">🍽
+          Explore Menu</button>
+        <button class="btn-secondary"
+          onclick="document.getElementById('order').scrollIntoView({behavior:'smooth'})">Quick Order →</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">120+</span><span class="stat-label">Menu Items</span></div>
+        <div class="stat"><span class="stat-num">4.9★</span><span class="stat-label">Avg Rating</span></div>
+        <div class="stat"><span class="stat-num">25min</span><span class="stat-label">Avg Delivery</span></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img class="hero-img-main" src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=900&q=80"
+        alt="Signature dish">
+
+      <!-- Deco -->
+      <div class="deco-circle" style="width:300px;height:300px;background:var(--saffron);top:-60px;right:-60px;"></div>
+      <div class="deco-circle" style="width:150px;height:150px;background:var(--ember);bottom:40px;right:-30px;"></div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="about">
+    <div class="about-img-wrap reveal">
+      <img class="about-img-main" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80"
+        alt="Restaurant interior">
+    </div>
+    <div class="about-text reveal">
+      <span class="about-tag">🌿 Our Story</span>
+      <h2 class="section-title">Where Tradition Meets<br><em style="font-style:italic;color:var(--ember)">Modern
+          Flavor</em></h2>
+      <p>Saffron & Ember was born in 2018 from a simple belief — that restaurant-quality food should be accessible to
+        everyone, delivered hot to your doorstep without compromise.</p>
+      <p>Our head chef, Meera Krishnan, trained across Rajasthan, Kerala and Italy, bringing a unique East-meets-West
+        approach. Every dish is crafted fresh, using seasonal produce sourced within 100 km of our kitchen.</p>
+      <div class="about-values">
+        <div class="value-card">
+          <div class="value-icon">🌾</div>
+          <div class="value-title">Farm Fresh</div>
+          <div class="value-desc">Ingredients sourced daily from local organic farms.</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">👨‍🍳</div>
+          <div class="value-title">Expert Chefs</div>
+          <div class="value-desc">Our team holds international culinary certifications.</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">⚡</div>
+          <div class="value-title">Fast Delivery</div>
+          <div class="value-desc">Average delivery time of 25 minutes, guaranteed warm.</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">♻️</div>
+          <div class="value-title">Eco Packaging</div>
+          <div class="value-desc">100% biodegradable, compostable packaging materials.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MENU ============ -->
+  <section id="menu">
+    <div class="menu-header reveal">
+      <div>
+        <span class="section-label">🍴 Our Specialties</span>
+        <h2 class="section-title">Handpicked <em style="font-style:italic;color:var(--ember)">Favourites</em></h2>
+      </div>
+      <div class="menu-filters">
+        <button class="filter-btn active" onclick="filterMenu('all',this)">All</button>
+        <button class="filter-btn" onclick="filterMenu('starters',this)">Starters</button>
+        <button class="filter-btn" onclick="filterMenu('mains',this)">Mains</button>
+        <button class="filter-btn" onclick="filterMenu('biryani',this)">Biryani</button>
+        <button class="filter-btn" onclick="filterMenu('desserts',this)">Desserts</button>
+      </div>
+    </div>
+    <div class="menu-grid" id="menu-grid"></div>
+  </section>
+
+  <!-- ============ ORDER (INTERACTIVE) ============ -->
+  <section id="order">
+    <div class="order-inner">
+      <div class="order-left reveal">
+        <span class="section-label">⚡ Quick Order</span>
+        <h2 class="section-title" style="color:#fff;">Order in<br><em
+            style="color:var(--saffron);font-style:italic">Minutes</em></h2>
+        <p>Skip the line. Fill in your details, pick your favorites from the cart, and we'll handle the rest — piping
+          hot, right to your door.</p>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">01</div>
+            <div class="step-text">
+              <h4>Browse & Add to Cart</h4>
+              <p>Pick from our curated menu and build your perfect order.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">02</div>
+            <div class="step-text">
+              <h4>Fill Your Details</h4>
+              <p>Your name, address and preferred delivery time — that's all.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">03</div>
+            <div class="step-text">
+              <h4>We Deliver to You</h4>
+              <p>Our riders bring your food fresh, hot, and perfectly packaged.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="order-form reveal" id="order-form-wrap">
+        <h3>Place Your Order</h3>
+        <div id="order-form-content">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" id="fname" placeholder="Arjun" />
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" id="lname" placeholder="Menon" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" id="phone" placeholder="+91 98765 43210" />
+          </div>
+          <div class="form-group">
+            <label>Delivery Address</label>
+            <input type="text" id="address" placeholder="123, MG Road, Thrissur" />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>City</label>
+              <input type="text" id="city" placeholder="Thrissur" />
+            </div>
+            <div class="form-group">
+              <label>Delivery Time</label>
+              <select id="dtime">
+                <option>ASAP (25 min)</option>
+                <option>30 – 45 min</option>
+                <option>Schedule for later</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Special Instructions</label>
+            <textarea id="special" placeholder="Less spice, no onions, extra sauce..."></textarea>
+          </div>
+          <div class="cart-summary">
+            <span id="order-cart-label">🛒 0 items in cart</span>
+            <span class="cart-total" id="order-cart-total">₹0</span>
+          </div>
+          <button class="form-submit" onclick="submitOrder()">🔥 Confirm Order &rarr;</button>
+        </div>
+        <div id="form-success">
+          <div class="success-icon">🎉</div>
+          <h4>Order Placed Successfully!</h4>
+          <p>Your food is being prepared. Estimated delivery: <strong>25–30 minutes.</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GALLERY (ADDITIONAL) ============ -->
+  <section id="gallery">
+    <div class="gallery-header reveal">
+      <span class="section-label">📸 Visual Feast</span>
+      <h2 class="section-title">From Our Kitchen<br>to Your <em style="font-style:italic;color:var(--ember)">Table</em>
+      </h2>
+    </div>
+    <div class="gallery-grid reveal">
+      <div class="gallery-item">
+        <img class="gallery-img" src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&q=80"
+          alt="Gourmet dish">
+        <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
+      </div>
+      <div class="gallery-item">
+        <img class="gallery-img" src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&q=80"
+          alt="Biryani">
+        <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
+      </div>
+      <div class="gallery-item">
+        <img class="gallery-img" src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400&q=80"
+          alt="Salad">
+        <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
+      </div>
+      <div class="gallery-item">
+        <img class="gallery-img" src="https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=800&q=80"
+          alt="Dessert spread">
+        <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
+      </div>
+      <div class="gallery-item">
+        <img class="gallery-img" src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=400&q=80"
+          alt="Pasta">
+        <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
+      </div>
+      <div class="gallery-item">
+        <img class="gallery-img" src="https://images.unsplash.com/photo-1587314168485-3236d6710814?w=400&q=80"
+          alt="Noodles">
+        <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
+      </div>
+    </div>
+
+    <!-- React Testimonials Mount Point -->
+    <div id="react-testimonials-root"></div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="contact">
+    <div class="reveal">
+      <span class="section-label">📍 Find Us</span>
+      <h2 class="section-title">Get In <em style="font-style:italic;color:var(--ember)">Touch</em></h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <h4>Our Kitchen</h4>
+            <p>42, Round South, Thrissur, Kerala — 680001</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <h4>Call Us</h4>
+            <a href="tel:+919876543210">+91 98765 43210</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <h4>Email</h4>
+            <a href="mailto:hello@saffronember.in">hello@saffronember.in</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <h4>Delivery Hours</h4>
+            <p>Mon–Sun · 11:00 AM – 11:00 PM</p>
+          </div>
+        </div>
+        <div>
+          <h4 style="margin-bottom:0.8rem;font-size:0.9rem;">Follow Us</h4>
+          <div class="social-row">
+            <a href="https://facebook.com" target="_blank" class="social-btn" title="Facebook"><i
+                class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://twitter.com" target="_blank" class="social-btn" title="Twitter"><i
+                class="fa-brands fa-twitter"></i></a>
+            <a href="https://instagram.com" target="_blank" class="social-btn" title="Instagram"><i
+                class="fa-brands fa-instagram"></i></a>
+            <a href="https://youtube.com" target="_blank" class="social-btn" title="YouTube"><i
+                class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="map-embed">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3922.9567439162985!2d76.21634867503803!3d10.520448189613674!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7ee15f33d0619%3A0xcda67c9c22e431ed!2sRound%20South%2C%20Thrissur%2C%20Kerala!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+      <div class="contact-form-box reveal">
+        <h3>Send a Message</h3>
+        <div class="cf-row">
+          <div class="cf-group">
+            <label>Name</label>
+            <input type="text" placeholder="Your name" id="cf-name" />
+          </div>
+          <div class="cf-group">
+            <label>Phone</label>
+            <input type="tel" placeholder="+91 ..." id="cf-phone" />
+          </div>
+        </div>
+        <div class="cf-group">
+          <label>Email</label>
+          <input type="email" placeholder="you@email.com" id="cf-email" />
+        </div>
+        <div class="cf-group">
+          <label>Subject</label>
+          <input type="text" placeholder="Feedback, bulk order, partnership..." id="cf-subject" />
+        </div>
+        <div class="cf-group">
+          <label>Message</label>
+          <textarea placeholder="Tell us how we can help..." id="cf-message"></textarea>
+        </div>
+        <button class="cf-submit" onclick="submitContact()">Send Message 🚀</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="nav-logo">Saffron<span>&</span>Ember</span>
+        <p>Bringing restaurant-quality food to your home, crafted with heritage spices and modern techniques since 2018.
+        </p>
+        <div class="social-row">
+          <a href="https://facebook.com" target="_blank" class="social-btn" title="Facebook"><i
+              class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://twitter.com" target="_blank" class="social-btn" title="Twitter"><i
+              class="fa-brands fa-twitter"></i></a>
+          <a href="https://instagram.com" target="_blank" class="social-btn" title="Instagram"><i
+              class="fa-brands fa-instagram"></i></a>
+          <a href="https://youtube.com" target="_blank" class="social-btn" title="YouTube"><i
+              class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#order">Order Now</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Our Cuisine</h4>
+        <ul>
+          <li><a href="#menu"
+              onclick="filterMenu('starters', document.querySelector('.filter-btn[onclick*=\'starters\']'))">Starters</a>
+          </li>
+          <li><a href="#menu"
+              onclick="filterMenu('mains', document.querySelector('.filter-btn[onclick*=\'mains\']'))">Mains</a></li>
+          <li><a href="#menu"
+              onclick="filterMenu('biryani', document.querySelector('.filter-btn[onclick*=\'biryani\']'))">Biryani</a>
+          </li>
+          <li><a href="#menu"
+              onclick="filterMenu('desserts', document.querySelector('.filter-btn[onclick*=\'desserts\']'))">Desserts</a>
+          </li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Policies</h4>
+        <ul>
+          <li><a href="policies.html">Privacy Policy</a></li>
+          <li><a href="policies.html">Refund Policy</a></li>
+          <li><a href="policies.html">Terms of Service</a></li>
+          <li><a href="policies.html">FSSAI License</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Saffron & Ember. All rights reserved.</p>
+      <p style="color:rgba(255,255,255,0.25);font-size:0.75rem;">Made with ❤️ in Thrissur, Kerala</p>
+    </div>
+  </footer>
+
+  <!-- CART FAB -->
+  <button class="cart-fab" onclick="openCart()" id="cart-fab">
+    🛒
+    <span class="cart-count" id="cart-badge" style="display:none">0</span>
+  </button>
+
+  <!-- CART MODAL -->
+  <div class="modal-overlay" id="cart-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Your Cart 🛒</h3>
+        <button class="modal-close" onclick="closeCart()">×</button>
+      </div>
+      <div id="cart-items-container"></div>
+      <div id="cart-footer" style="display:none">
+        <div class="modal-total">
+          <span>Total</span>
+          <span id="modal-total-price" style="color:var(--ember)">₹0</span>
+        </div>
+        <button class="modal-checkout" onclick="scrollToOrder()">Proceed to Order →</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <!-- Load React Components as Babel script -->
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    const defaultReviews = [
+      {
+        id: 1,
+        stars: 5,
+        text: "The Butter Chicken Biryani had me calling back the same night for a second order. Absolutely incredible — better than my mom's, and that says a lot.",
+        author: "Rahul Varma",
+        role: "Regular Customer · Mumbai",
+        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80"
+      },
+      {
+        id: 2,
+        stars: 5,
+        text: "Ordering was seamless. The packaging was beautiful, everything arrived warm. The Malabar Prawns are now a weekly ritual for me.",
+        author: "Priya Nair",
+        role: "Food Blogger · Kerala",
+        avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b5e5?w=80&q=80"
+      },
+      {
+        id: 3,
+        stars: 5,
+        text: "Ordered for a family dinner of 12. Every single dish was perfect. The Dal Makhani is clearly slow-cooked with love. 10/10, will always recommend.",
+        author: "Anand Krishnan",
+        role: "Software Engineer · Bangalore",
+        avatar: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=80&q=80"
+      },
+      {
+        id: 4,
+        stars: 4,
+        text: "The paneer tikka was extremely soft and well-marinated. Delivery was quick, though I wish they had more dessert options.",
+        author: "Sneha Patel",
+        role: "Vegetarian Foodie",
+        avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=80"
+      },
+      {
+        id: 5,
+        stars: 5,
+        text: "As someone who appreciates authentic Kerala cuisine, the Fish Moilee blew my mind. The coconut milk balance was perfect. A must try!",
+        author: "Thomas George",
+        role: "Local Guide",
+        avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&q=80"
+      },
+      {
+        id: 6,
+        stars: 5,
+        text: "Saffron & Ember is my go-to for late-night cravings. The Chicken 65 is always crispy, and the Gulab Jamun melts in your mouth.",
+        author: "Ayesha Khan",
+        role: "Student",
+        avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&q=80"
+      },
+      {
+        id: 7,
+        stars: 5,
+        text: "The eco-friendly packaging is a massive plus. Food quality is consistently top-notch. Can't recommend them enough for weekend dinners.",
+        author: "Vikram Singh",
+        role: "Eco-Advocate",
+        avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&q=80"
+      }
+    ];
+
+    function Testimonials() {
+      const [reviews, setReviews] = useState([]);
+      const [currentIndex, setCurrentIndex] = useState(0);
+      const [currentUser, setCurrentUser] = useState(null);
+
+      // Form State
+      const [newReviewText, setNewReviewText] = useState("");
+      const [newRating, setNewRating] = useState(5);
+
+      useEffect(() => {
+        // Load reviews from local storage, merge with defaults
+        const storedReviews = JSON.parse(localStorage.getItem('reviews') || '[]');
+        setReviews([...defaultReviews, ...storedReviews]);
+
+        // Check if user is logged in
+        const userStr = localStorage.getItem('currentUser');
+        if (userStr) {
+          setCurrentUser(JSON.parse(userStr));
+        }
+      }, []);
+
+      const handleNext = () => {
+        if (currentIndex < reviews.length - 1) {
+          setCurrentIndex(prev => prev + 1);
+        }
+      };
+
+      const handlePrev = () => {
+        if (currentIndex > 0) {
+          setCurrentIndex(prev => prev - 1);
+        }
+      };
+
+      const handleSubmitReview = (e) => {
+        e.preventDefault();
+        if (!newReviewText.trim()) return;
+
+        const newReview = {
+          id: Date.now(),
+          stars: newRating,
+          text: newReviewText,
+          author: currentUser.name,
+          role: "Verified Diner",
+          avatar: "https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=80&q=80" // Default avatar
+        };
+
+        const storedReviews = JSON.parse(localStorage.getItem('reviews') || '[]');
+        storedReviews.push(newReview);
+        localStorage.setItem('reviews', JSON.stringify(storedReviews));
+
+        setReviews(prev => [...prev, newReview]);
+        setNewReviewText("");
+        setCurrentIndex(reviews.length); // jump to new review
+
+        // Using global showToast from script.js
+        if (window.showToast) window.showToast("⭐ Review added successfully!");
+      };
+
+      return (
+        <div className="testimonials reveal visible">
+          <h3>What Our Guests Say 💬</h3>
+
+          <div className="carousel-container">
+            <div
+              className="carousel-track"
+              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
+            {reviews.map((r, i) => (
+              <div className="carousel-item" key={r.id}>
+                <div className="testimonial-card">
+                  <div className="t-stars">{"★".repeat(r.stars)}{"☆".repeat(5 - r.stars)}</div>
+                  <p className="t-text">"{r.text}"</p>
+                  <div className="t-author">
+                    <img className="t-avatar" src={r.avatar} alt={r.author} />
+                    <div>
+                      <div className="t-name">{r.author}</div>
+                      <div className="t-role">{r.role}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="carousel-controls">
+            <button className="carousel-btn" onClick={handlePrev} disabled={currentIndex === 0}>←</button>
+            <button className="carousel-btn" onClick={handleNext} disabled={currentIndex === reviews.length - 1}>→</button>
+          </div>
+        </div>
+
+      {
+        currentUser ? (
+          <div className="review-form-container">
+            <h4>Leave a Review</h4>
+            <form onSubmit={handleSubmitReview}>
+              <div className="review-form-group">
+                <label>Rating</label>
+                <div className="star-rating-select">
+                  {[1, 2, 3, 4, 5].map(star => (
+                    <span
+                      key={star}
+                      className={star <= newRating ? "active" : ""}
+                      onClick={() => setNewRating(star)}
+                    >
+                      ★
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="review-form-group">
+                <label>Your Review</label>
+                <textarea
+                  placeholder="Tell us what you loved..."
+                  value={newReviewText}
+                  onChange={(e) => setNewReviewText(e.target.value)}
+                  required
+                />
+              </div>
+              <button type="submit" className="cf-submit" style={{ width: 'auto', padding: '0.8rem 2rem' }}>Submit Review</button>
+            </form>
+          </div>
+        ) : (
+          <div style={{ textAlign: 'center', marginTop: '2rem', color: 'var(--mid)', fontSize: '0.9rem' }}>
+            <a href="login.html" style={{ color: 'var(--ember)', fontWeight: 'bold', textDecoration: 'none' }}>Log in</a> to write a review.
+          </div>
+        )
+      }
+    </div >
+  );
+    }
+
+    const rootElement = document.getElementById('react-testimonials-root');
+    if (rootElement) {
+      const root = ReactDOM.createRoot(rootElement);
+      root.render(<Testimonials />);
+    }
+  </script>
+</body>
+
+</html>

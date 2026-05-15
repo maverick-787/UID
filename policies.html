@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Policies — Saffron & Ember</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  .policies-container {
+    max-width: 800px;
+    margin: 120px auto 60px;
+    padding: 2rem 5vw;
+    background: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+  }
+  .policies-container h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--dark);
+    margin-bottom: 2rem;
+  }
+  .policies-container h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--dark);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+  .policies-container p {
+    color: var(--mid);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+  .back-btn {
+    display: inline-block;
+    margin-bottom: 2rem;
+    color: var(--ember);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .back-btn:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">Saffron<span>&</span>Ember</div>
+  <ul class="nav-links">
+    <li><a href="index.html#home">Home</a></li>
+    <li><a href="index.html#menu">Menu</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" onclick="toggleTheme()" id="theme-icon" title="Toggle Dark Mode">🌙</button>
+  </div>
+</nav>
+
+<div class="policies-container">
+  <a href="index.html" class="back-btn">&larr; Back to Home</a>
+
+  <h1>Legal & Policies</h1>
+
+  <h2>Privacy Policy</h2>
+  <p>At Saffron & Ember, we value your privacy. This policy outlines how we collect, use, and protect your personal information when you use our food ordering services. We only collect essential information required to process and deliver your orders, such as your name, contact number, and delivery address. Your data is never sold to third parties.</p>
+
+  <h2>Terms of Service</h2>
+  <p>By placing an order with Saffron & Ember, you agree to our terms of service. All orders are subject to availability and confirmation of the order price. Delivery times are estimates and may vary based on traffic and weather conditions. We reserve the right to refuse service to anyone for any reason at any time.</p>
+
+  <h2>Refund Policy</h2>
+  <p>If you are not entirely satisfied with your order, we're here to help. Refunds or replacements are provided for missing items, incorrect items, or food quality issues if reported within 2 hours of delivery. Please contact our support team with your order details.</p>
+
+  <h2>FSSAI License</h2>
+  <p>Saffron & Ember operates under the strict guidelines of the Food Safety and Standards Authority of India (FSSAI). We maintain the highest standards of hygiene and food safety in our kitchen.<br><br><strong>License No:</strong> 12345678901234</p>
+</div>
+
+<script>
+// Check saved theme on load for policies page
+document.addEventListener('DOMContentLoaded', () => {
+  const savedTheme = localStorage.getItem('theme');
+  const icon = document.getElementById('theme-icon');
+  if (savedTheme === 'dark') {
+    document.documentElement.classList.add('dark-mode');
+    if (icon) icon.textContent = '☀️';
+  } else {
+    if (icon) icon.textContent = '🌙';
+  }
+});
+
+function toggleTheme() {
+  const root = document.documentElement;
+  const isDark = root.classList.toggle('dark-mode');
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  const icon = document.getElementById('theme-icon');
+  if (icon) {
+    icon.textContent = isDark ? '☀️' : '🌙';
+  }
+}
+</script>
+
+</body>
+</html>
